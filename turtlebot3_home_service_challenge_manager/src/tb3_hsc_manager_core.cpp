@@ -161,35 +161,35 @@ void TaskManager::ready_task_thread()
   is_running_task_thread_ = true;
 
   // reset odom
-  publish_reset_turtlebot();
+  //publish_reset_turtlebot();
 
-  sleep_for(100, 3000, is_running_sub_task_thread_, is_pause_, is_stop_);
+  //sleep_for(100, 3000, is_running_sub_task_thread_, is_pause_, is_stop_);
 
   // move arm to init pose
-  move_arm_joint("home_with_object");
+  //move_arm_joint("home_with_object");
 
-  sleep_for(100, 0, is_running_sub_task_thread_, is_pause_, is_stop_);
+  //sleep_for(100, 0, is_running_sub_task_thread_, is_pause_, is_stop_);
 
-  open_gripper();
+  //open_gripper();
 
-  sleep_for(100, 0, is_running_sub_task_thread_, is_pause_, is_stop_);
+  //sleep_for(100, 0, is_running_sub_task_thread_, is_pause_, is_stop_);
 
   // reset init pose
-  geometry_msgs::PoseWithCovariance init_pose;
-  init_pose.pose.position.x = 0;
-  init_pose.pose.position.y = 0;
-  init_pose.pose.position.z = 0;
-  init_pose.pose.orientation.x = 0;
-  init_pose.pose.orientation.y = 0;
-  init_pose.pose.orientation.z = 0;
-  init_pose.pose.orientation.w = 1;
+  //geometry_msgs::PoseWithCovariance init_pose;
+  //init_pose.pose.position.x = 0;
+  //init_pose.pose.position.y = 0;
+  //init_pose.pose.position.z = 0;
+  //init_pose.pose.orientation.x = 0;
+  //init_pose.pose.orientation.y = 0;
+  //init_pose.pose.orientation.z = 0;
+  //init_pose.pose.orientation.w = 1;
 
-  init_pose.covariance.at(0) = 0.25;
-  init_pose.covariance.at(7) = 0.25;
-  init_pose.covariance.at(35) = 0.06853891945200942;
-  publish_init_pose(init_pose);
+  //init_pose.covariance.at(0) = 0.25;
+  //init_pose.covariance.at(7) = 0.25;
+  //init_pose.covariance.at(35) = 0.06853891945200942;
+  //publish_init_pose(init_pose);
 
-  sleep_for(100, 3000, is_running_sub_task_thread_, is_pause_, is_stop_);
+  //sleep_for(100, 3000, is_running_sub_task_thread_, is_pause_, is_stop_);
 
   ROS_INFO("Ready to run the task");
 
@@ -199,10 +199,11 @@ void TaskManager::ready_task_thread()
 
 void TaskManager::finish_task()
 {
-  ROS_INFO("prepared to finish the job.");
+  //ROS_INFO("prepared to finish the job.");
+   ROS_INFO("Task Finished.");
 
-  moving_thread_ = new boost::thread(boost::bind(&TaskManager::finish_task_thread, this));
-  delete moving_thread_;
+  //moving_thread_ = new boost::thread(boost::bind(&TaskManager::finish_task_thread, this));
+  //delete moving_thread_;
 
   is_ready_mission_ = false;
 }

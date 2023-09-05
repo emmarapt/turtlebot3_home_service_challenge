@@ -7,7 +7,7 @@
 #  retry_times : 0  #times, 0 : no retry
 
 start :
-  task : none
+  task : none #move_arm_to_home_1
   args : [0]
   timeout : 0 #sec, 0 : no time out
   next_scenario : find_object_1
@@ -16,7 +16,7 @@ start :
   
 # ==============================================
 # =================== room 1 ===================
-
+################################ aproach to target
 find_object_1 :
   task : find_object
   args : [room_1, object]
@@ -37,21 +37,21 @@ approach_to_object_1 :
   task : approach
   args : [room_1, object, 2]   # room number, target type, repeat number
   timeout : 0 #sec, 0 : no time out
-  next_scenario : pick_object_1
+  next_scenario : finish #pick_object_1
   scenario_on_failure : standby
   retry_times : 0  #times, 0 : no retry
- 
+############################ pick an object
 pick_object_1:
   task : manipulation_task
   args : [room_1, object]
   timeout : 0 #sec, 0 : no time out
-  next_scenario: grasp_on_1
+  next_scenario: grasp_off_2
   scenario_on_failure : standby
   retry_times : 0
-  
-grasp_on_1:
+
+grasp_off_2:
   task : gripper
-  args : [close]
+  args : [open]
   timeout : 0 #sec, 0 : no time out
   next_scenario : move_arm_to_via_1
   scenario_on_failure : standby
@@ -61,17 +61,27 @@ move_arm_to_via_1:
   task : manipulation_joint
   args : [via_pose]
   timeout : 0 #sec, 0 : no time out
+  next_scenario : grasp_on_1
+  scenario_on_failure : standby
+  retry_times : 0
+
+grasp_on_1:
+  task : gripper
+  args : [close]
+  timeout : 0 #sec, 0 : no time out
   next_scenario : move_arm_to_home_1
   scenario_on_failure : standby
   retry_times : 0
- 
+  
 move_arm_to_home_1:
   task : manipulation_joint
   args : [home_with_object]
   timeout : 0 #sec, 0 : no time out
-  next_scenario : leave_object_1
+  next_scenario : finish
   scenario_on_failure : standby
   retry_times : 0
+
+######################################### leave object 1
 
 leave_object_1:
   task : leave
@@ -85,10 +95,14 @@ turn_to_room_1:
   task : turn
   args : [room_1]   
   timeout : 0 #sec, 0 : no time out
-  next_scenario : nav_to_room_1
+  next_scenario : finish #nav_to_room_1
   scenario_on_failure : standby
   retry_times : 0
- 
+
+##########################################
+
+######################################### place object 1
+
 nav_to_room_1 :
   task : navigation
   args : [room_1, none, room_1, target]   # room number, target type, room_number(real target), type
@@ -115,7 +129,7 @@ nav_to_target_1 :
   
 approach_to_target_1 :
   task : approach
-  args : [room_1, target, 1]   # room number, target type, repeat number
+  args : [room_1, target, 4]   # room number, target type, repeat number
   timeout : 0 #sec, 0 : no time out
   next_scenario : move_arm_to_via_1b
   scenario_on_failure : standby
@@ -149,10 +163,10 @@ move_arm_to_home_1b:
   task : manipulation_joint
   args : [home_with_object]
   timeout : 0 #sec, 0 : no time out
-  next_scenario : leave_target_1
+  next_scenario : finish #leave_target_1
   scenario_on_failure : standby
   retry_times : 0
-
+##########################################################
 leave_target_1:
   task : leave
   args : [0.20]   # leave distance
@@ -173,7 +187,7 @@ nav_to_start_1:
   task : navigation
   args : [start, none, none, none]   # room number, target type, room_number(real target), type
   timeout : 60 #sec, 0 : no time out
-  next_scenario : find_object_2
+  next_scenario : finish
   scenario_on_failure : standby
   retry_times : 3  #times, 0 : no retry
  

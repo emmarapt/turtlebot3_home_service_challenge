@@ -73,7 +73,7 @@ void TaskManager::callback_thread()
   cancel_nav_pub_ = nh.advertise<actionlib_msgs::GoalID>(robot_name_ + "/move_base/cancel", 0);
   cmd_vel_pub_ = nh.advertise<geometry_msgs::Twist>(robot_name_ + "/cmd_vel", 0);
   debug_marker_pub_ = nh.advertise<visualization_msgs::MarkerArray>(robot_name_ + "/marker", 0);
-  reset_turtlebot_pub_ = nh.advertise<std_msgs::Empty>(robot_name_ + "/reset", 0);
+  //reset_turtlebot_pub_ = nh.advertise<std_msgs::Empty>(robot_name_ + "/reset", 0);
   init_pose_pub_ = nh.advertise<geometry_msgs::PoseWithCovarianceStamped>(robot_name_ + "/initialpose", 0);
   gripper_moving_time_pub_ = nh.advertise<std_msgs::Float64>(robot_name_ + "/gripper_move_time", 0);
 
@@ -350,7 +350,7 @@ void TaskManager::publish_reset_turtlebot()
 {
   std_msgs::Empty msg;
 
-  reset_turtlebot_pub_.publish(msg);
+  //reset_turtlebot_pub_.publish(msg);
   ROS_INFO("RESET Turtlebot!!");
 }
 
