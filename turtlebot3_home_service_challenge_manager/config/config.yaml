@@ -32,7 +32,7 @@ arm_pose:
     joint4 : -9.0
   
 approach:
-  distance : 0.075
+  distance : 0.015
   linear_vel : 0.05
   angular_vel : 0.1
   interval_sleep_ms : 500
